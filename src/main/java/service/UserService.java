@@ -9,12 +9,13 @@ public class UserService {
         ClientDAO clientDAO = new ClientDAOImpl();
         return clientDAO.getByLoginPassword(login, password);
     }
+
     public Client logOut() {
         return null;
     }
 
     public Client register(String login, String password) {
-        if(isExist(login)){
+        if (isExist(login)) {
             return null;
         }
         ClientDAO clientDAO = new ClientDAOImpl();
@@ -27,15 +28,12 @@ public class UserService {
 
     private boolean isExist(String login) {
         ClientDAO clientDAO = new ClientDAOImpl();
-       return clientDAO.isExistsByLogin(login);
+        return clientDAO.isExistsByLogin(login);
     }
 
     public void exit() {
         System.out.println("До свидания.");
         System.exit(0);
-    }
-    private int calcID(){
-        return 0;
     }
 
 }

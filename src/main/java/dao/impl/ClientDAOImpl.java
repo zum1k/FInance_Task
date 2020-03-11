@@ -29,7 +29,7 @@ public class ClientDAOImpl implements ClientDAO {
         Client client;
         strings = fileManager.readStrings(checker, FILEPATH);
         ClientMapperImpl clientMapper = new ClientMapperImpl();
-        if(strings.size()==0){
+        if (strings.size() == 0) {
             System.out.println("В файле ничего нет");
             return null;
 
@@ -64,11 +64,12 @@ public class ClientDAOImpl implements ClientDAO {
             throw new DAOException("Данного файла нет: " + FILEPATH, ex);
         }
     }
-    private int calcID(){
+
+    private int calcID() {
         int res = 0;
         try {
             Scanner in = new Scanner(new File(FILEPATH));
-            List<String> strings  = new ArrayList<>();
+            List<String> strings = new ArrayList<>();
             while (in.hasNextLine()) {
                 if (in.hasNextLine()) {
                     strings.add(in.nextLine());
@@ -78,10 +79,10 @@ public class ClientDAOImpl implements ClientDAO {
                 return 1;
             }
             ClientMapper clientMapper = new ClientMapperImpl();
-            res = clientMapper.toClient(strings.get(strings.size()-1)).getId();
+            res = clientMapper.toClient(strings.get(strings.size() - 1)).getId();
         } catch (IOException e) {
-            throw new DAOException("Ошибка чтения " , e);
+            throw new DAOException("Ошибка чтения ", e);
         }
-        return res+1;
+        return res + 1;
     }
 }

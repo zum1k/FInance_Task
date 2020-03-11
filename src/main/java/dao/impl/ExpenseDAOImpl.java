@@ -1,17 +1,16 @@
 package dao.impl;
 
 import dao.ExpensesDAO;
-import dao.checker.expense.*;
 import dao.checker.Checker;
+import dao.checker.expense.*;
 import dao.exception.DAOException;
 import dao.filemanager.FileManager;
+import dao.filemanager.FileManagerImpl;
 import dao.mapper.ExpenseMapper;
 import dao.mapper.impl.ExpenseMapperImpl;
-import dao.filemanager.FileManagerImpl;
 import entity.Expense;
 import entity.ExpenseType;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class ExpenseDAOImpl implements ExpensesDAO {
     private static final String FILEPATH = "src/main/resources/Expenses.txt";
-   private int id;
+    private int id;
 
     public ExpenseDAOImpl(int id) {
         this.id = id;
@@ -75,12 +74,13 @@ public class ExpenseDAOImpl implements ExpensesDAO {
     }
 
     @Override
-    public void setExpense(int id, Calendar date, ExpenseType expenseType, BigDecimal cost)  {
+    public void setExpense(int id, Calendar date, ExpenseType expenseType, BigDecimal cost) {
         ExpenseMapper expenseMapper = new ExpenseMapperImpl();
-        Expense expense = new Expense(id,date, expenseType, cost);
+        Expense expense = new Expense(id, date, expenseType, cost);
         String string = expenseMapper.toString(expense);
         FileManager fileManager = new FileManagerImpl();
-        try {fileManager.writeString(string, FILEPATH);
+        try {
+            fileManager.writeString(string, FILEPATH);
         } catch (IOException ex) {
             throw new DAOException("Ошибка записи в файл: " + FILEPATH, ex);
         }

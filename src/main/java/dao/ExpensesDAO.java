@@ -19,7 +19,7 @@ public interface ExpensesDAO {
 
     List<Expense> getAllByType(ExpenseType expenseType);
 
-    List<Expense> getAllByExpenseTypeFromDate(ExpenseType expenseType,Calendar date);
+    List<Expense> getAllByExpenseTypeFromDate(ExpenseType expenseType, Calendar date);
 
     List<Expense> getAllExpenseTypeFromTo(ExpenseType expenseType, Calendar date1, Calendar date2);
 

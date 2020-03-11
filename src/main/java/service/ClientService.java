@@ -34,7 +34,7 @@ public class ClientService {
 
     public List<String> getAllExpenseTypeByDate(int id, ExpenseType expenseType, Calendar date) {
         ExpenseDAOImpl expenseDAO = new ExpenseDAOImpl(id);
-        List<Expense> expenses = expenseDAO.getAll();
+        List<Expense> expenses = expenseDAO.getExpenseTypeByDate(expenseType, date);
         return loadService(expenses);
     }
 
