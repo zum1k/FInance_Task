@@ -3,9 +3,7 @@ package dao.filemanager;
 import dao.checker.Checker;
 import dao.exception.DAOException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,7 +33,8 @@ public class FileManagerImpl implements FileManager {
     @Override
     public void writeString(String string, String filename) {
         try (FileWriter fileWriter = new FileWriter(filename, true)) {
-            fileWriter.write("\n" + string + "\n");
+            fileWriter.write(string+"\n");
+            fileWriter.flush();
         } catch (IOException ex) {
             throw new DAOException("Ошибка записи: ", ex);
         }

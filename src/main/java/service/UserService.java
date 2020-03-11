@@ -9,6 +9,9 @@ public class UserService {
         ClientDAO clientDAO = new ClientDAOImpl();
         return clientDAO.getByLoginPassword(login, password);
     }
+    public Client logOut() {
+        return null;
+    }
 
     public Client register(String login, String password) {
         if(isExist(login)){

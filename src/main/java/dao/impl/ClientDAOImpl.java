@@ -5,13 +5,13 @@ import dao.checker.Checker;
 import dao.checker.client.CheckerByLoginImpl;
 import dao.checker.client.CheckerByLoginPassword;
 import dao.exception.DAOException;
+import dao.filemanager.FileManager;
 import dao.filemanager.FileManagerImpl;
 import dao.mapper.ClientMapper;
 import dao.mapper.impl.ClientMapperImpl;
 import entity.Client;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +54,12 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public void register(Client client) {
-        try (FileWriter writer = new FileWriter(FILEPATH, true)) {
-            client.setId(calcID());
-            ClientMapperImpl clientMapper = new ClientMapperImpl();
-            String string = clientMapper.toString(client);
-
-            writer.write(string);
-            writer.flush();
+        client.setId(calcID());
+        ClientMapperImpl clientMapper = new ClientMapperImpl();
+        String string = clientMapper.toString(client);
+        FileManager fileManager = new FileManagerImpl();
+        try {
+            fileManager.writeString(string, FILEPATH);
         } catch (IOException ex) {
             throw new DAOException("Данного файла нет: " + FILEPATH, ex);
         }

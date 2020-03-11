@@ -17,11 +17,12 @@ public class ExpenseMapperImpl implements ExpenseMapper {
     public static final int ID_INDEX = 0;
     public static final int DATE_INDEX = 1;
     public static final int EXPENSE_TYPE_INDEX = 2;
+    public static final int BIG_DECIMAL_INDEX = 3;
 
     public static final int YEAR_INDEX = 0;
     public static final int MONTH_INDEX = 1;
     public static final int DAY_INDEX = 2;
-    public static final int BIG_DECIMAL_INDEX = 3;
+
 
     @Override
     public String toString(Expense expense) {

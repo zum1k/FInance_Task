@@ -20,6 +20,6 @@ public class ExpenseCheckerFrom implements Checker {
     public boolean check(String string) {
         ExpenseMapper expenseMapper = new ExpenseMapperImpl();
         Expense expense = expenseMapper.toExpense(string);
-        return id == expense.getId() && (date.compareTo(expense.getCalendar()) > 0);
+        return id == expense.getId() && (date.compareTo(expense.getCalendar()) <= 0);
     }
 }

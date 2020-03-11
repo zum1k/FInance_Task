@@ -71,9 +71,9 @@ public class ClientService {
     private String sum(List<Expense> expenses){
         int res = 0;
         for (Expense e:expenses){
-           res =+ e.getCost().intValue();
+           res += e.getCost().intValue();
         }
-        return "summ = "+res;
+        return "sum = "+res;
     }
     private List<String> loadService(List<Expense> expenses){
         List<String> strings = new ArrayList<>();

@@ -4,6 +4,7 @@ import dao.ExpensesDAO;
 import dao.checker.expense.*;
 import dao.checker.Checker;
 import dao.exception.DAOException;
+import dao.filemanager.FileManager;
 import dao.mapper.ExpenseMapper;
 import dao.mapper.impl.ExpenseMapperImpl;
 import dao.filemanager.FileManagerImpl;
@@ -75,13 +76,11 @@ public class ExpenseDAOImpl implements ExpensesDAO {
 
     @Override
     public void setExpense(int id, Calendar date, ExpenseType expenseType, BigDecimal cost)  {
-        try (FileWriter writer = new FileWriter(FILEPATH, true)) {
-            ExpenseMapper expenseMapper = new ExpenseMapperImpl();
-            Expense expense = new Expense(id,date, expenseType, cost);
-            String string = expenseMapper.toString(expense);
-
-            writer.write(string);
-            writer.flush();
+        ExpenseMapper expenseMapper = new ExpenseMapperImpl();
+        Expense expense = new Expense(id,date, expenseType, cost);
+        String string = expenseMapper.toString(expense);
+        FileManager fileManager = new FileManagerImpl();
+        try {fileManager.writeString(string, FILEPATH);
         } catch (IOException ex) {
             throw new DAOException("Ошибка записи в файл: " + FILEPATH, ex);
         }
@@ -90,11 +89,11 @@ public class ExpenseDAOImpl implements ExpensesDAO {
     private List<Expense> loadExpenses(Checker checker) {
         FileManagerImpl fileManager = new FileManagerImpl();
         List<Expense> expenses = new ArrayList<>();
-        List<String> strings = new ArrayList<>();
+        List<String> strings;
         strings = fileManager.readStrings(checker, FILEPATH);
         ExpenseMapperImpl expenseMapper = new ExpenseMapperImpl();
-        for (int i = 0; i < strings.size(); i++) {
-            expenses.set(i, expenseMapper.toExpense(strings.get(i)));
+        for (String string : strings) {
+            expenses.add(expenseMapper.toExpense(string));
         }
         return expenses;
     }
