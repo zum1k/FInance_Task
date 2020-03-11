@@ -6,5 +6,5 @@ public enum ExpenseType {
     UTILITY,
     WEAR,
     FUN,
-    OTHER
+    OTHER;
 }

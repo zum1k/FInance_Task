@@ -26,7 +26,6 @@ public class ExpenseCheckerByTypeFromTo implements Checker {
     public boolean check(String string) {
         ExpenseMapper expenseMapper = new ExpenseMapperImpl();
         Expense expense = expenseMapper.toExpense(string);
-
         return id == expense.getId() && (date1.compareTo(expense.getCalendar()) <= 0)
                 && (date2.compareTo(expense.getCalendar()) >= 0) &&
                 (expenseType.compareTo(expense.getExpenseType() ) == 0);
